@@ -1,7 +1,7 @@
 body {
-  background: #f6f8fa;
-  color: #222;
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
 }
 
 .app-container {
@@ -12,18 +12,35 @@ body {
   justify-content: center;
 }
 
-.header {
-  width: 100%;
+.header-bar {
+  margin-top: 2.5rem;
   margin-bottom: 2rem;
+  padding: 0 1rem;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
+  flex: 1;
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #3a3a3a;
+  color: var(--color-header);
+}
+
+.theme-toggle {
+  margin-left: auto;
 }
 
 .card, .form-card {
-  background: #fff;
+  background: var(--color-card-bg);
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   padding: 2rem;
@@ -38,21 +55,29 @@ body {
   gap: 1rem;
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  margin-bottom: 1.1em;
+}
+
 input, select {
   padding: 0.7em 1em;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--color-input-border);
   border-radius: 6px;
   font-size: 1rem;
-  background: #f9fafb;
+  background: var(--color-input-bg);
   transition: border 0.2s;
+  color: var(--color-text);
 }
 input:focus, select:focus {
-  border: 1.5px solid #646cff;
+  border: 1.5px solid var(--color-link);
   outline: none;
 }
 
 button {
-  background: #646cff;
+  background: var(--color-link);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -63,7 +88,7 @@ button {
   transition: background 0.2s;
 }
 button:hover {
-  background: #535bf2;
+  background: var(--color-link-hover);
 }
 
 .job-list {
@@ -72,13 +97,33 @@ button:hover {
   margin: 0;
 }
 .job-list li {
-  background: #f3f4f6;
+  background: var(--color-card-bg);
+  color: var(--color-text);
   border-radius: 8px;
   margin-bottom: 0.7rem;
   padding: 1rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border: 1px solid var(--color-input-border);
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark .job-list li {
+  background: #23272f;
+  color: #f3f4f6;
+  border: 1px solid #333a44;
+}
+
+body.dark .job-list li button {
+  background: #353b48;
+  color: #fff;
+  border: 1px solid #444a55;
+}
+
+body.dark .job-list li button:hover {
+  background: #50586b;
 }
 
 @media (max-width: 600px) {
@@ -89,5 +134,12 @@ button:hover {
   .header {
     font-size: 1.3rem;
     padding: 1rem 0 0.5rem 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .header-bar {
+    max-width: 98vw;
+    padding: 0 0.5rem;
   }
 }

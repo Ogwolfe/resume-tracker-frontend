@@ -23,15 +23,15 @@ export default function Register() {
       <div className="form-card">
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="form-group">
             <label>Username</label>
             <input name="username" value={form.username} onChange={handleChange} required />
           </div>
-          <div>
+          <div className="form-group">
             <label>Email</label>
             <input name="email" type="email" value={form.email} onChange={handleChange} required />
           </div>
-          <div>
+          <div className="form-group">
             <label>Password</label>
             <input name="password" type="password" value={form.password} onChange={handleChange} required />
           </div>

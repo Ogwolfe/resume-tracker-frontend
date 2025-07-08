@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
 import axiosInstance from './api/axios';
 
-export default function Dashboard() {
+export default function Dashboard({ toggleTheme, theme }) {
   const { user, logout } = useAuth();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -86,7 +86,6 @@ export default function Dashboard() {
 
   return (
     <div className="app-container">
-      <div className="header">Resume Tracker</div>
       <div className="card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <div>Hello, {user?.username || user?.email || 'User'}!</div>

@@ -23,11 +23,11 @@ export default function Login() {
       <div className="form-card">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="form-group">
             <label>Username</label>
             <input name="username" value={form.username} onChange={handleChange} required />
           </div>
-          <div>
+          <div className="form-group">
             <label>Password</label>
             <input name="password" type="password" value={form.password} onChange={handleChange} required />
           </div>
