@@ -11,6 +11,7 @@ export default function Dashboard({ toggleTheme, theme }) {
   const [adding, setAdding] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({ company: '', position: '', resume_used: '', date_applied: '', status: '' });
+  const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
     async function fetchJobs() {
@@ -92,7 +93,13 @@ export default function Dashboard({ toggleTheme, theme }) {
           <button onClick={logout}>Logout</button>
         </div>
         <h3>Job Applications</h3>
-        {loading ? <div>Loading...</div> : error ? <div style={{ color: 'red' }}>{error}</div> : (
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div style={{ color: 'red' }}>{error}</div>
+        ) : jobs.length === 0 ? (
+          <div style={{ color: '#888', fontStyle: 'italic', margin: '1.5em 0' }}>No applications yet...</div>
+        ) : (
           <ul className="job-list">
             {jobs.map(job => (
               <li key={job.id}>
@@ -123,15 +130,32 @@ export default function Dashboard({ toggleTheme, theme }) {
             ))}
           </ul>
         )}
-        <h3 style={{ marginTop: 32 }}>Add New Job</h3>
-        <form onSubmit={handleAddJob} style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <input name="company" placeholder="Company" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} required />
-          <input name="position" placeholder="Position" value={form.position} onChange={e => setForm(f => ({ ...f, position: e.target.value }))} required />
-          <input name="resume_used" placeholder="Resume Used" value={form.resume_used} onChange={e => setForm(f => ({ ...f, resume_used: e.target.value }))} />
-          <input name="date_applied" type="date" placeholder="Date Applied" value={form.date_applied} onChange={e => setForm(f => ({ ...f, date_applied: e.target.value }))} />
-          <input name="status" placeholder="Status (e.g. applied, interview)" value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))} />
-          <button type="submit" disabled={adding}>Add Job</button>
-        </form>
+        {/* Add New Job Section */}
+        <div style={{ marginTop: 32 }}>
+          {!showAddForm ? (
+            <button onClick={() => setShowAddForm(true)} style={{ minWidth: 160 }}>
+              Add New Job
+            </button>
+          ) : (
+            <form
+              onSubmit={async e => {
+                await handleAddJob(e);
+                setShowAddForm(false);
+              }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 12 }}
+            >
+              <input name="company" placeholder="Company" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} required />
+              <input name="position" placeholder="Position" value={form.position} onChange={e => setForm(f => ({ ...f, position: e.target.value }))} required />
+              <input name="resume_used" placeholder="Resume Used" value={form.resume_used} onChange={e => setForm(f => ({ ...f, resume_used: e.target.value }))} />
+              <input name="date_applied" type="date" placeholder="Date Applied" value={form.date_applied} onChange={e => setForm(f => ({ ...f, date_applied: e.target.value }))} />
+              <input name="status" placeholder="Status (e.g. applied, interview)" value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))} />
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button type="submit" disabled={adding}>Add Job</button>
+                <button type="button" onClick={() => setShowAddForm(false)} disabled={adding}>Cancel</button>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );
