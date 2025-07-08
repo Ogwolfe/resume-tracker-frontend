@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
       setLoading(true);
       try {
         const res = await axiosInstance.get('/api/me');
-        setUser(res.data.user);
+        setUser(res.data);
       } catch {
         // Optionally handle error
       } finally {
@@ -44,9 +44,9 @@ export function AuthProvider({ children }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await axiosInstance.post('/register', { username, email, password });
-      setUser(res.data.user || { email });
-      navigate('/dashboard');
+      await axiosInstance.post('/register', { username, email, password });
+      // Automatically log in after successful registration
+      await login({ username, password });
     } catch (err) {
       setError(err.response?.data?.message || err.message);
       throw err;
