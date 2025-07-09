@@ -2,6 +2,7 @@
   --font-family: 'Inter', 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --color-bg: #ffffff;
   --color-text: #213547;
+  --color-text-secondary: #6b7280;
   --color-link: #646cff;
   --color-link-hover: #747bff;
   --color-button-bg: #f9f9f9;
@@ -15,6 +16,7 @@
 .dark {
   --color-bg: #242424;
   --color-text: rgba(255, 255, 255, 0.87);
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
   --color-link: #646cff;
   --color-link-hover: #535bf2;
   --color-button-bg: #1a1a1a;
