@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 function Header({ theme, toggleTheme }) {
   return (
     <div className="header-bar">
-      <span className="header-title">Resume Tracker</span>
+      <span className="header-title">Application Tracker</span>
       <button className="theme-toggle" onClick={toggleTheme}>
         Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
       </button>

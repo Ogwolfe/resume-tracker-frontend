@@ -19,7 +19,6 @@ export default function Login() {
 
   return (
     <div className="app-container">
-      <div className="header">Resume Tracker</div>
       <div className="form-card">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
